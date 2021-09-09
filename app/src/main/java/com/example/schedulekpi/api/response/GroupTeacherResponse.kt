@@ -2,7 +2,7 @@ package com.example.schedulekpi.api.response
 
 import com.google.gson.annotations.SerializedName
 
-data class ScheduleResponse(
+data class GroupTeacherResponse(
 
     @SerializedName("statusCode")
     val statusCode: Int,
@@ -20,5 +20,5 @@ data class ScheduleResponse(
     val meta: Meta? = null,
 
     @SerializedName("data")
-    val data: List<Lesson>? = null
+    val data: List<GroupTeacher>? = null
 )

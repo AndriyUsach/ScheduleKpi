@@ -47,7 +47,7 @@ data class Lesson(
     val rate: String,
 
     @SerializedName("teachers")
-    val teachers: List<Teacher>,
+    val teachers: List<GroupTeacher>,
 
     @SerializedName("rooms")
     val rooms: List<Room>

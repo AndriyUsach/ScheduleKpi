@@ -1,4 +1,4 @@
-package com.example.schedulekpi
+package com.example.schedulekpi.ui.activity
 
 import android.os.Bundle
 import android.util.Log
@@ -11,24 +11,26 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.lifecycleScope
 import com.example.schedulekpi.api.ScheduleApi
+import com.example.schedulekpi.app.ScheduleApplication
 import com.example.schedulekpi.data.common.Constants
 import com.example.schedulekpi.ui.theme.ScheduleKpiTheme
 import com.example.schedulekpi.utils.UrlHelper
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import javax.inject.Inject
 
 class MainActivity : ComponentActivity() {
+
+    @Inject
+    lateinit var scheduleApi: ScheduleApi
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val retrofit = Retrofit.Builder()
-            .baseUrl(Constants.BASE_URL)
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-            .create(ScheduleApi::class.java)
+        ScheduleApplication.instance.applicationComponent.inject(this)
 
         lifecycleScope.launchWhenCreated {
-            val a = retrofit.getGroupTeachers("бс-92")
+            val a = scheduleApi.getGroupTeachers("бс-92")
             Log.d("TAG", a.toString())
         }
 

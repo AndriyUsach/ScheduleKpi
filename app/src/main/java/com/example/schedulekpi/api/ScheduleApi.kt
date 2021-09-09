@@ -1,14 +1,12 @@
 package com.example.schedulekpi.api
 
-import android.net.IpPrefix
 import com.example.schedulekpi.api.response.GroupListResponse
 import com.example.schedulekpi.api.response.GroupResponse
-import com.example.schedulekpi.api.response.ScheduleResponse
-import com.example.schedulekpi.api.response.TeacherResponse
+import com.example.schedulekpi.api.response.GroupTeacherResponse
+import com.example.schedulekpi.api.response.GroupScheduleResponse
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
-import retrofit2.http.QueryMap
 
 interface ScheduleApi : GroupApi, TeacherApi, InfoApi
 
@@ -41,12 +39,12 @@ interface GroupApi {
     @GET("groups/{group}/lessons")
     suspend fun getGroupSchedule(
         @Path("group") group: String
-    ): ScheduleResponse
+    ): GroupScheduleResponse
 
     @GET("groups/{group}/teachers")
     suspend fun getGroupTeachers(
         @Path("group") group: String
-    ): TeacherResponse
+    ): GroupTeacherResponse
 
 }
 
