@@ -1,4 +1,4 @@
-package com.example.schedulekpi.data
+package com.example.schedulekpi.data.room
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

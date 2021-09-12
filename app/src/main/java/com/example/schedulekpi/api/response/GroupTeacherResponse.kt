@@ -17,8 +17,8 @@ data class GroupTeacherResponse(
     val debugInfo: String? = null,
 
     @SerializedName("meta")
-    val meta: Meta? = null,
+    val meta: MetaResponse? = null,
 
     @SerializedName("data")
-    val data: List<GroupTeacher>? = null
+    val data: List<GroupDataTeacherResponse>? = null
 )

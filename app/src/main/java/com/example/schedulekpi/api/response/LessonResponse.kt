@@ -2,7 +2,7 @@ package com.example.schedulekpi.api.response
 
 import com.google.gson.annotations.SerializedName
 
-data class Lesson(
+data class LessonResponse(
 
     @SerializedName("lesson_id")
     val lessonId: String,
@@ -47,8 +47,8 @@ data class Lesson(
     val rate: String,
 
     @SerializedName("teachers")
-    val teachers: List<GroupTeacher>,
+    val teachers: List<GroupDataTeacherResponse>,
 
     @SerializedName("rooms")
-    val rooms: List<Room>
+    val rooms: List<RoomResponse>
 )

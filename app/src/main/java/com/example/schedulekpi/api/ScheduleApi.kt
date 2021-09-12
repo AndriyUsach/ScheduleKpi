@@ -1,7 +1,7 @@
 package com.example.schedulekpi.api
 
 import com.example.schedulekpi.api.response.GroupListResponse
-import com.example.schedulekpi.api.response.GroupResponse
+import com.example.schedulekpi.api.response.GroupDataResponse
 import com.example.schedulekpi.api.response.GroupTeacherResponse
 import com.example.schedulekpi.api.response.GroupScheduleResponse
 import retrofit2.http.GET
@@ -22,13 +22,13 @@ interface GroupApi {
     @GET("groups/{name}")
     suspend fun getGroupByName(
         @Path("name") name: String
-    ): GroupResponse
+    ): GroupDataResponse
 
     //get group by id
     @GET("groups/{id}")
     suspend fun getGroupById(
         @Path("id") id: String
-    ): GroupResponse
+    ): GroupDataResponse
 
     // search group by prefix
     @GET("groups/?")

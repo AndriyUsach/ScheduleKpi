@@ -2,7 +2,7 @@ package com.example.schedulekpi.api.response
 
 import com.google.gson.annotations.SerializedName
 
-data class Meta(
+data class MetaResponse(
 
     @SerializedName("total_count")
     val totalCount: String,

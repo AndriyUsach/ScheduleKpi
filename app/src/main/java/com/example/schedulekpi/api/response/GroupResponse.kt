@@ -2,23 +2,24 @@ package com.example.schedulekpi.api.response
 
 import com.google.gson.annotations.SerializedName
 
+
 data class GroupResponse(
 
-    @SerializedName("statusCode")
-    val statusCode: Int,
+    @SerializedName("group_id")
+    val id: Int,
 
-    @SerializedName("timeStamp")
-    val timeStamp: Long,
+    @SerializedName("group_full_name")
+    val fullName: String,
 
-    @SerializedName("message")
-    val message: String,
+    @SerializedName("group_prefix")
+    val prefix: String,
 
-    @SerializedName("debugInfo")
-    val debugInfo: String? = null,
+    @SerializedName("group_okr")
+    val okr: String,
 
-    @SerializedName("meta")
-    val meta: Meta? = null,
+    @SerializedName("group_tupe")
+    val type: String,
 
-    @SerializedName("data")
-    val data: Group? = null
+    @SerializedName("group_url")
+    val url: String
 )

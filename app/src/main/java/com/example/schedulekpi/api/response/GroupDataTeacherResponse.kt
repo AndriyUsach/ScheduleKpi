@@ -2,7 +2,7 @@ package com.example.schedulekpi.api.response
 
 import com.google.gson.annotations.SerializedName
 
-data class GroupTeacher(
+data class GroupDataTeacherResponse(
 
     @SerializedName("teacher_id")
     val id: String,

@@ -1,4 +1,4 @@
-package com.example.schedulekpi.data
+package com.example.schedulekpi.data.room
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
@@ -7,12 +7,11 @@ import androidx.room.PrimaryKey
 
 @Entity
 data class Lesson(
-    @PrimaryKey val id: Int,
+    @PrimaryKey @ColumnInfo(name = "lesson_id") val lessonId: Int,
     //field for select the desired lessons
     @ColumnInfo(name = "week_number") val weekNumber: Int,
     @ColumnInfo(name = "day_number") val dayNumber: Int,
     //--------------------------------------------------
-    @ColumnInfo(name = "lesson_id") val lessonId: Int,
     @ColumnInfo(name = "group_id") val groupId: Int,
     @ColumnInfo(name = "day_name") val dayName: String,
     @ColumnInfo(name = "lesson_name") val lessonName: String,
