@@ -1,5 +1,6 @@
 package com.example.schedulekpi.repository
 
+import android.util.Log
 import com.example.schedulekpi.api.ScheduleRemoteSource
 import com.example.schedulekpi.converters.LessonResponseToModelConverter
 import com.example.schedulekpi.data.room.Lesson
@@ -13,15 +14,16 @@ class ScheduleRepository(
     dispatcher: CoroutineDispatcher
 ) {
 
-    private val job: Job? = null
+    private var job: Job? = null
 
     private val scope = CoroutineScope(dispatcher)
 
     suspend fun updateSchedule(group: String) {
+        Log.d("ROOM", "START")
         if (job?.isActive == true) {
-            job.join()
+            job?.join()
         } else {
-            val job = scope.launch {
+            job = scope.launch {
 //                val schedule =
 //                    withContext(scope.coroutineContext) {
 //                        scheduleRemoteSource.getGroupSchedule(group).data
@@ -32,12 +34,19 @@ class ScheduleRepository(
 //                    converter.convert(schedule)
 //                }
                 val schedule = scheduleRemoteSource.getGroupSchedule(group).data
+                println(schedule)
                 if (schedule.isNullOrEmpty())
                     return@launch
                 val container = converter.convert(schedule)
-                converter.clear()
+                println(container)
 
+                Log.d("ROOM", "insert to database")
+                println(container.lessons)
                 scheduleLocalSource.addLesson(container.lessons)
+                scheduleLocalSource.addTeacher(container.teachers)
+                scheduleLocalSource.addRoom(container.rooms)
+                Log.d("ROOM", "FINISH")
+                converter.clear()
             }
         }
     }
@@ -45,6 +54,4 @@ class ScheduleRepository(
     private suspend fun writeLessonToSchedule(lesson: List<Lesson>) {
 
     }
-
-
 }

@@ -1,7 +1,8 @@
 package com.example.schedulekpi.di.component
 
-import com.example.schedulekpi.MainActivity
+import android.app.Application
 import com.example.schedulekpi.di.module.ApplicationModule
+import com.example.schedulekpi.ui.activity.MainActivity
 import dagger.Component
 import javax.inject.Singleton
 
@@ -11,4 +12,5 @@ import javax.inject.Singleton
 interface ApplicationComponent {
 
     fun inject(activity: MainActivity)
+    fun inject(application: Application)
 }

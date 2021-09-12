@@ -1,6 +1,7 @@
 package com.example.schedulekpi.di.module
 
 import com.example.schedulekpi.api.ScheduleApi
+import com.example.schedulekpi.api.ScheduleRemoteSource
 import com.example.schedulekpi.data.common.Constants
 import dagger.Module
 import dagger.Provides
@@ -25,5 +26,10 @@ class NetworkModule {
     @Singleton
     fun provideScheduleApi(retrofit: Retrofit): ScheduleApi {
         return retrofit.create(ScheduleApi::class.java)
+    }
+
+    @Provides
+    fun provideScheduleRemoteSource(scheduleApi: ScheduleApi): ScheduleRemoteSource {
+        return ScheduleRemoteSource(scheduleApi)
     }
 }

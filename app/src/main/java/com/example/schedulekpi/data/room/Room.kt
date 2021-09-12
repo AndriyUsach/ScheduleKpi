@@ -6,7 +6,7 @@ import androidx.room.PrimaryKey
 
 @Entity
 data class Room(
-    @PrimaryKey(autoGenerate = true) val id: Int,
+    @PrimaryKey @ColumnInfo(name = "room_id") val id: Int,
     @ColumnInfo(name = "name") val name: String,
     @ColumnInfo(name = "latitude") val latitude: String,
     @ColumnInfo(name = "longitude") val longitude: String
