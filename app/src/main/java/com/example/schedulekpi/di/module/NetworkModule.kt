@@ -1,35 +1,41 @@
 package com.example.schedulekpi.di.module
 
-import com.example.schedulekpi.api.ScheduleApi
-import com.example.schedulekpi.api.ScheduleRemoteSource
-import com.example.schedulekpi.data.common.Constants
+import com.example.schedulekpi.feature_schedule.data.api.GroupApi
+import com.example.schedulekpi.feature_schedule.data.api.ScheduleApi
 import dagger.Module
 import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
 
-
 @Module
-class NetworkModule {
+@InstallIn(SingletonComponent::class)
+object NetworkModule {
 
     @Provides
     @Singleton
     fun provideRetrofit(): Retrofit {
         return Retrofit.Builder()
-            .baseUrl(Constants.BASE_URL)
+            .baseUrl(ScheduleApi.BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }
 
     @Provides
     @Singleton
-    fun provideScheduleApi(retrofit: Retrofit): ScheduleApi {
+    fun provideScheduleApi(
+        retrofit: Retrofit
+    ): ScheduleApi {
         return retrofit.create(ScheduleApi::class.java)
     }
 
     @Provides
-    fun provideScheduleRemoteSource(scheduleApi: ScheduleApi): ScheduleRemoteSource {
-        return ScheduleRemoteSource(scheduleApi)
+    @Singleton
+    fun provideGroupApi(
+        scheduleApi: ScheduleApi
+    ): GroupApi {
+        return scheduleApi
     }
 }

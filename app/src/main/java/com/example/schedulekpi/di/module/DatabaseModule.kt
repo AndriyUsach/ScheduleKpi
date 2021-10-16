@@ -2,55 +2,68 @@ package com.example.schedulekpi.di.module
 
 import android.app.Application
 import androidx.room.Room
-import com.example.schedulekpi.data.common.DatabaseInfo
-import com.example.schedulekpi.data.room.ScheduleDatabase
-import com.example.schedulekpi.data.room.dao.LessonDao
-import com.example.schedulekpi.data.room.dao.RoomDao
-import com.example.schedulekpi.data.room.dao.ScheduleLocalSource
-import com.example.schedulekpi.data.room.dao.TeacherDao
+import com.example.schedulekpi.feature_schedule.data.db.*
 import dagger.Module
 import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
+
 @Module
-class DatabaseModule(private val application: Application) {
+@InstallIn(SingletonComponent::class)
+object DatabaseModule {
 
     @Provides
     @Singleton
-    fun provideScheduleDatabase(): ScheduleDatabase {
+    fun provideScheduleDatabase(app: Application): ScheduleDatabase {
         return Room.databaseBuilder(
-            application,
+            app,
             ScheduleDatabase::class.java,
-            DatabaseInfo.databaseName,
+            ScheduleDatabase.DB_NAME
         ).fallbackToDestructiveMigration()
             .build()
     }
 
     @Provides
-    fun provideLessonDao(scheduleDatabase: ScheduleDatabase): LessonDao {
-        return scheduleDatabase.lessonDao()
+    fun provideLessonDao(
+        scheduleDatabase: ScheduleDatabase
+    ): LessonDao {
+        return scheduleDatabase.lessonDao
     }
 
     @Provides
-    fun provideTeacherDao(scheduleDatabase: ScheduleDatabase): TeacherDao {
-        return scheduleDatabase.teacherDao()
+    fun provideTeacherDao(
+        scheduleDatabase: ScheduleDatabase
+    ): TeacherDao {
+        return scheduleDatabase.teacherDao
     }
 
     @Provides
-    fun provideRoomDao(scheduleDatabase: ScheduleDatabase): RoomDao {
-        return scheduleDatabase.roomDao()
+    fun provideRoomDao(
+        scheduleDatabase: ScheduleDatabase
+    ): RoomDao {
+        return scheduleDatabase.roomDao
     }
 
     @Provides
-    fun provideScheduleLocalSource(
-        lessonDao: LessonDao,
-        teacherDao: TeacherDao,
-        roomDao: RoomDao
-    ): ScheduleLocalSource {
-        return ScheduleLocalSource(
-            lessonDao = lessonDao,
-            teacherDao = teacherDao,
-            roomDao = roomDao
-        )
+    fun provideLessonTeacherDao(
+        scheduleDatabase: ScheduleDatabase
+    ): LessonTeacherDao {
+        return scheduleDatabase.lessonTeacherDao
+    }
+
+    @Provides
+    fun provideLessonRoomDao(
+        scheduleDatabase: ScheduleDatabase
+    ): LessonRoomDao {
+        return scheduleDatabase.lessonRoomDao
+    }
+
+    @Provides
+    fun provideGroupScheduleDao(
+        scheduleDatabase: ScheduleDatabase
+    ): GroupScheduleDao {
+        return scheduleDatabase.groupScheduleDao
     }
 }

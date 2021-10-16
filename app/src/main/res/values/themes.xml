@@ -22,4 +22,9 @@
     <style name="Theme.ScheduleKpi.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="Theme.ScheduleKpi.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="splashScheduleScreen" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="android:windowBackground">@drawable/splash_image</item>
+        <item name="android:statusBarColor">@color/white</item>
+    </style>
 </resources>
